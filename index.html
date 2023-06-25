@@ -15,49 +15,53 @@
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
-    <div class="ms-timer-container d-flex align-items-center justify-content-center my-5 fs-1 fw-bold">
-      Timer:
-      <span id="timer" class="d-none"></span> 
-      <!--end timer-->
+    <div class="ms-game-container">
+
+      <div class="ms-timer-container d-flex align-items-center justify-content-center my-5 fs-1 fw-bold">
+        Timer:
+        <span id="timer" >30s</span> 
+        <!--end timer-->
+      </div>
+      <!--end timer container-->
+      <h2 class="text-center fw-bold fs-3">Simon Says:</h2>
+      <div class="display d-flex align-items-center justify-content-center gap-3 mb-5">
+        <div  class="number fw-bold fs-1 border ms-number-container text-center p-0"></div>
+        <!--end number -->
+        <div  class="number fw-bold fs-1 border ms-number-container text-center p-0"></div>
+        <!--end number -->
+        <div  class="number fw-bold fs-1 border ms-number-container text-center p-0"></div>
+        <!--end number -->
+        <div  class="number fw-bold fs-1 border ms-number-container text-center p-0"></div>
+        <!--end number -->
+        <div  class="number fw-bold fs-1 border ms-number-container text-center p-0"></div>
+        <!--end number -->
+      </div>
+      <!--end display -->
+      <h2 id="player-title" class="text-center fw-bold fs-3 d-none">Numeri Player:</h2>
+      <div class="display d-flex align-items-center justify-content-center gap-3 mb-5 ">
+        <div  class=" d-none fw-bold fs-1 border ms-player-number-container text-center p-0"></div>
+        <!--end number -->
+        <div  class=" d-none fw-bold fs-1 border ms-player-number-container text-center p-0"></div>
+        <!--end number -->
+        <div  class=" d-none fw-bold fs-1 border ms-player-number-container text-center p-0"></div>
+        <!--end number -->
+        <div  class=" d-none fw-bold fs-1 border ms-player-number-container text-center p-0"></div>
+        <!--end number -->
+        <div  class=" d-none fw-bold fs-1 border ms-player-number-container text-center p-0"></div>
+        <!--end number -->
+      </div>
+      <p class="text-center fw-bold fs-1 d-none">
+      Punti <span id="player-points">8</span> 
+      </p>
+      <!--end display -->
+      <div class="ms-button-wrapper text-center">
+        <button id="start-button" class="btn btn-success px-4">
+          Start
+        </button>
+      </div>
+      <!--end button wrapper-->
     </div>
-    <!--end timer container-->
-    <h2 class="text-center fw-bold fs-3">Simon Says:</h2>
-    <div class="display d-flex align-items-center justify-content-center gap-3 mb-5">
-      <div  class="number fw-bold fs-1 border ms-number-container text-center p-0"></div>
-      <!--end number -->
-      <div  class="number fw-bold fs-1 border ms-number-container text-center p-0"></div>
-      <!--end number -->
-      <div  class="number fw-bold fs-1 border ms-number-container text-center p-0"></div>
-      <!--end number -->
-      <div  class="number fw-bold fs-1 border ms-number-container text-center p-0"></div>
-      <!--end number -->
-      <div  class="number fw-bold fs-1 border ms-number-container text-center p-0"></div>
-      <!--end number -->
-    </div>
-    <!--end display -->
-    <h2 id="player-title" class="text-center fw-bold fs-3 d-none">Numeri Player:</h2>
-    <div class="display d-flex align-items-center justify-content-center gap-3 mb-5 ">
-      <div  class=" d-none fw-bold fs-1 border ms-player-number-container text-center p-0"></div>
-      <!--end number -->
-      <div  class=" d-none fw-bold fs-1 border ms-player-number-container text-center p-0"></div>
-      <!--end number -->
-      <div  class=" d-none fw-bold fs-1 border ms-player-number-container text-center p-0"></div>
-      <!--end number -->
-      <div  class=" d-none fw-bold fs-1 border ms-player-number-container text-center p-0"></div>
-      <!--end number -->
-      <div  class=" d-none fw-bold fs-1 border ms-player-number-container text-center p-0"></div>
-      <!--end number -->
-    </div>
-    <p class="text-center fw-bold fs-1 d-none">
-    Punti <span id="player-points">8</span> 
-    </p>
-    <!--end display -->
-    <div class="ms-button-wrapper text-center">
-      <button id="start-button" class="btn btn-success px-4">
-        Start
-      </button>
-    </div>
-    <!--end button wrapper-->
+    <!--end game container-->
     <!--my js-->
     <script src="./js/script.js"></script>
   </body>

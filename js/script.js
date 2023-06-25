@@ -38,22 +38,22 @@ const timerDisplay = document.getElementById('timer')
 const pointsDisplay = document.getElementById('player-points') 
 
 //Globals variables
-const initialTime = 30;
+const initialTime = 10;
 let time =  initialTime;
 let initialNumbersArray = []
 let inputPlayerNumbers = []
 let point = 0
 const maxRangeNumber = 10;
+
 //Game functions
 const gameStart = ()=> {
-  inputPlayerNumbers = [] // correggere bug play again
+  inputPlayerNumbers = [] 
   playerNumberDisplay.forEach(element => {
     element.classList.add('d-none')
   })
   playerTitle.classList.add('d-none')
   pointsDisplay.parentElement.classList.add('d-none')
-  timerDisplay.classList.remove('d-none');
-  timerDisplay.innerHTML = time + 's'
+  renderHtml(time + 's', timerDisplay)
   initialNumbersArray = createRandomUniqueNumbers(1, maxRangeNumber);
   renderHtml(initialNumbersArray, numberDisplay)
   createInterval()
@@ -79,11 +79,10 @@ const createRandomUniqueNumbers = (min,  max) => {
 const createInterval = () => {
   const clearHtml =  setTimeout(() => {
     numberDisplay.forEach(singleDisplay => {
-      singleDisplay.innerHTML = ''  
+      renderHtml('', singleDisplay)
     });
     clearInterval(timer);
     time = initialTime;
-    //creare la funzione che invia i prompt all'utente
   }, (initialTime * 1000) + 100);
 
   const initPromps = setTimeout(()=>{
@@ -93,19 +92,17 @@ const createInterval = () => {
       element.classList.remove('d-none')
     })
     renderHtml(verificatePints(inputPlayerNumbers), pointsDisplay)
-    timerDisplay.classList.add('d-none');
     playerTitle.classList.remove('d-none')
     pointsDisplay.parentElement.classList.remove('d-none')
     buttonStart.removeAttribute("disabled")
-    buttonStart.innerHTML = 'Play Again'
-    //modificare il renderHTML in maniera da potergli dare come argomento dove inserire il contenuto
+    renderHtml('Play Again', buttonStart)
     renderHtml(inputPlayerNumbers, playerNumberDisplay)
   }, (initialTime * 1000) + 200 );
 
   const timer = setInterval(() => {
     time--;
     const timeToString = String(time)
-    timerDisplay.innerHTML = timeToString.padStart(2, "0") + 's';
+    renderHtml(timeToString.padStart(2, "0") + 's', timerDisplay)
   }, 1000);
 };
 

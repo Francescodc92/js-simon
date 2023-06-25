@@ -6,11 +6,30 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body{
+  background-image: url(../img/bg-img.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.ms-game-container {
+  background-color: rgba(0  , 0, 0 , 0.5);
+  color: #fff;
+  width: 50rem;
+  margin: 3.125rem auto;
+  padding-block: 3.125rem;
+}
+
 .ms-number-container,
 .ms-player-number-container{
   width: 3.75rem;
   height: 3.75rem;
   background-color: #f3f2f2;
+  color: #000;
   line-height:3.75rem ;
 }
 
