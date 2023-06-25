@@ -9,6 +9,7 @@
 body{
   background-image: url(../img/bg-img.webp);
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -36,5 +37,18 @@ body{
 
 .ms-timer-container{
   height: 50px;
+}
+
+.ms-select-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.ms-select-container #select-difficulty{
+  padding: .3125rem 1.25rem;
+  border-radius: .3125rem;
+  outline: none;
 }
 

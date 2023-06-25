@@ -22,6 +22,7 @@
         <span id="timer" >30s</span> 
         <!--end timer-->
       </div>
+      
       <!--end timer container-->
       <h2 class="text-center fw-bold fs-3">Simon Says:</h2>
       <div class="display d-flex align-items-center justify-content-center gap-3 mb-5">
@@ -54,11 +55,23 @@
       Punti <span id="player-points">8</span> 
       </p>
       <!--end display -->
-      <div class="ms-button-wrapper text-center">
-        <button id="start-button" class="btn btn-success px-4">
-          Start
-        </button>
+      <div class="ms-select-container">
+        <p class="mb-1">seleziona la difficoltà</p>
+        <select id="select-difficulty" aria-label="Default select example">
+          <option value="easy">facile</option>
+          <option value="medium">media</option>
+          <option value="hard">difficile</option>
+        </select>
+        <!--end select difficulty-->
       </div>
+      <!--end select container-->
+
+        <div class="ms-button-wrapper text-center">
+          <button id="start-button" class="btn btn-success px-4 mt-4">
+            Start
+          </button>
+        </div>
+      
       <!--end button wrapper-->
     </div>
     <!--end game container-->

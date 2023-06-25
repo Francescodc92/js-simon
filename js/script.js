@@ -36,29 +36,38 @@ const playerNumberDisplay = document.querySelectorAll('.ms-player-number-contain
 const playerTitle = document.getElementById('player-title')
 const timerDisplay = document.getElementById('timer')
 const pointsDisplay = document.getElementById('player-points') 
+const inputSelectDifficulty = document.getElementById('select-difficulty')
 
 //Globals variables
-const initialTime = 10;
+const initialTime = 30;
 let time =  initialTime;
 let initialNumbersArray = []
 let inputPlayerNumbers = []
 let point = 0
-const maxRangeNumber = 10;
+let maxRangeNumber = 10;
 
 //Game functions
 const gameStart = ()=> {
-  inputPlayerNumbers = [] 
+  inputPlayerNumbers = [];
   playerNumberDisplay.forEach(element => {
-    element.classList.add('d-none')
-  })
-  playerTitle.classList.add('d-none')
-  pointsDisplay.parentElement.classList.add('d-none')
-  renderHtml(time + 's', timerDisplay)
+    element.classList.add('d-none');
+  });
+  maxRangeNumber = setMaxRange();
+  playerTitle.classList.add('d-none');
+  pointsDisplay.parentElement.classList.add('d-none');
+  renderHtml(time + 's', timerDisplay);
   initialNumbersArray = createRandomUniqueNumbers(1, maxRangeNumber);
-  renderHtml(initialNumbersArray, numberDisplay)
-  createInterval()
-  buttonStart.setAttribute("disabled", "")
+  renderHtml(initialNumbersArray, numberDisplay);
+  createInterval();
+  buttonStart.setAttribute("disabled", "");
 };
+
+const setMaxRange = ()=> {
+  const difficultyLevel = inputSelectDifficulty.value;
+  const range = difficultyLevel == 'easy'? 10 : difficultyLevel == 'medium'? 50 : 100;
+
+  return range;
+}
 
 const randomNumber= (min,  max)=> {
   const number = Math.floor(Math.random() * (max - min + 1) ) + min;
