@@ -22,6 +22,7 @@ body{
   width: 50rem;
   margin: 3.125rem auto;
   padding-block: 3.125rem;
+  border-radius: 1.25rem;
 }
 
 .ms-number-container,
