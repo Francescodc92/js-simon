@@ -6,6 +6,12 @@
   RAGIONAMENTO BASE
   1. creare un bottone nell'html che fà partire il gioco
   2. creare una funzione che ritorna numeri casuali da 1 a x
+  //////////// possibile bonus /////////////
+  il range di numeri casuali dipende dalla difficoltà scelta dall'utente 
+    es. easy i numeri casuali andranno da 1 a 10
+        medium i numeri casuali andranno da 1 a 50
+        hard i numeri casuali andranno da 1 a 100
+  ///////////////////////////////////////////
   3. renderizzare i numeri nell'html
   4. al momento in cui i numeri vengono renderizzati far partire il timer che dopo 30 secondi rimuove i numeri dall'html
     - una volta rimossi i nummeri far partire i prompt che domanderanno all'utente i numeri uno per volta (uno per prompt)
@@ -22,3 +28,135 @@
     - stampare in pagina i numeri iniziali (ossia quelli randomici contenuti nell'array) e quelli inseriti dall'utente 
     - dare il colore rosso a quelli che non sono uguali
 */
+
+//HTML Elements
+const buttonStart = document.getElementById('start-button');
+const numberDisplay = document.querySelectorAll('.ms-number-container')
+const playerNumberDisplay = document.querySelectorAll('.ms-player-number-container')
+const playerTitle = document.getElementById('player-title')
+const timerDisplay = document.getElementById('timer')
+const pointsDisplay = document.getElementById('player-points') 
+
+//Globals variables
+const initialTime = 30;
+let time =  initialTime;
+let initialNumbersArray = []
+let inputPlayerNumbers = []
+let point = 0
+const maxRangeNumber = 10;
+//Game functions
+const gameStart = ()=> {
+  inputPlayerNumbers = [] // correggere bug play again
+  playerNumberDisplay.forEach(element => {
+    element.classList.add('d-none')
+  })
+  playerTitle.classList.add('d-none')
+  pointsDisplay.parentElement.classList.add('d-none')
+  timerDisplay.classList.remove('d-none');
+  timerDisplay.innerHTML = time + 's'
+  initialNumbersArray = createRandomUniqueNumbers(1, maxRangeNumber);
+  renderHtml(initialNumbersArray, numberDisplay)
+  createInterval()
+  buttonStart.setAttribute("disabled", "")
+};
+
+const randomNumber= (min,  max)=> {
+  const number = Math.floor(Math.random() * (max - min + 1) ) + min;
+  return number;
+};
+
+const createRandomUniqueNumbers = (min,  max) => {
+  const randomNumberArray = [];
+  do {
+    const number = randomNumber(min,  max);
+    if(!randomNumberArray.includes(number)){
+      randomNumberArray.push(number);
+    }
+  } while (randomNumberArray.length < 5);
+  return randomNumberArray;
+};
+
+const createInterval = () => {
+  const clearHtml =  setTimeout(() => {
+    numberDisplay.forEach(singleDisplay => {
+      singleDisplay.innerHTML = ''  
+    });
+    clearInterval(timer);
+    time = initialTime;
+    //creare la funzione che invia i prompt all'utente
+  }, (initialTime * 1000) + 100);
+
+  const initPromps = setTimeout(()=>{
+    inputPlayerNumbers = getPlayerInput()
+    renderHtml(initialNumbersArray,  numberDisplay)
+    playerNumberDisplay.forEach(element => {
+      element.classList.remove('d-none')
+    })
+    renderHtml(verificatePints(inputPlayerNumbers), pointsDisplay)
+    timerDisplay.classList.add('d-none');
+    playerTitle.classList.remove('d-none')
+    pointsDisplay.parentElement.classList.remove('d-none')
+    buttonStart.removeAttribute("disabled")
+    buttonStart.innerHTML = 'Play Again'
+    //modificare il renderHTML in maniera da potergli dare come argomento dove inserire il contenuto
+    renderHtml(inputPlayerNumbers, playerNumberDisplay)
+  }, (initialTime * 1000) + 200 );
+
+  const timer = setInterval(() => {
+    time--;
+    const timeToString = String(time)
+    timerDisplay.innerHTML = timeToString.padStart(2, "0") + 's';
+  }, 1000);
+};
+
+const getPlayerInput = ()=> {
+  const arrayPlayerNumbers = []
+  const number1 = prompt('inserisci il primo nummero della sequenza')
+  const number2 = prompt('inserisci il secondo nummero della sequenza')
+  const number3 = prompt('inserisci il terzo nummero della sequenza')
+  const number4 = prompt('inserisci il quarto nummero della sequenza')
+  const number5 = prompt('inserisci il quinto nummero della sequenza')
+
+  arrayPlayerNumbers.push(number1,number2,number3,number4,number5)
+
+  return arrayPlayerNumbers
+}
+
+const renderHtml = (elements, destinationElement) => {
+  if(typeof elements == "object"){
+    for (let i = 0; i < elements.length; i++) {
+      const number = elements[i];
+      destinationElement[i].innerHTML = number;
+    }
+  }else {
+    destinationElement.innerHTML = elements;
+  }
+
+};
+
+const verificatePints = (inputPlayerArray) =>{
+  point = 0
+  for (let i = 0; i < initialNumbersArray.length; i++) {
+    const currentNumber = initialNumbersArray[i];
+  
+    if(inputPlayerArray[i] == currentNumber && inputPlayerArray[i] != ""){
+      console.log(inputPlayerArray)
+      for (let j = 0; j < playerNumberDisplay.length; j++) {
+        const element = playerNumberDisplay[i];
+        element.style.backgroundColor = 'rgb(65, 136, 65)'
+        element.style.color = '#fff'
+      }
+      point++
+    }else if(inputPlayerArray[i] != currentNumber ){
+       for (let j = 0; j < playerNumberDisplay.length; j++) {
+        const element = playerNumberDisplay[i];
+        element.style.backgroundColor = 'rgb(151, 43, 43)'
+        element.style.color = '#fff'
+      }
+    }
+  }
+  return point
+}
+
+
+buttonStart.addEventListener('click', gameStart);
